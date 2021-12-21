@@ -152,6 +152,23 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getDeviceNameSync) {
     return self.getDeviceName;
 }
 
+RCT_EXPORT_METHOD(initDeviceInfo:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    resolve(@{
+        @"uniqueId": [self getUniqueId],
+        @"deviceId": [self getDeviceId],
+        @"bundleId": [self getBundleId],
+        @"systemName": [self getSystemName],
+        @"systemVersion": [self getSystemVersion],
+        @"appVersion": [self getAppVersion],
+        @"buildNumber": [self getBuildNumber],
+        @"isTablet": @([self isTablet]),
+        @"appName": [self getAppName],
+        @"brand": @"Apple",
+        @"model": [self getModel],
+        @"deviceType": [self getDeviceTypeName],
+    });
+}
+
 RCT_EXPORT_METHOD(getDeviceName:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     resolve(self.getDeviceName);
 }
