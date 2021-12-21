@@ -8,7 +8,7 @@ export type NotchDevice = {
   [key: string]: string;
 };
 
-interface NativeConstants {
+export interface NativeConstants {
   appName: string;
   appVersion: string;
   brand: string;
