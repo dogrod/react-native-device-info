@@ -174,7 +174,7 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public Map<String, Object> initDeviceInfo() {
+  public void Map<String, Object> initDeviceInfo(Promise p) {
     String appVersion, buildNumber, appName;
 
     try {
@@ -202,7 +202,7 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
     constants.put("model", Build.MODEL);
     constants.put("deviceType", deviceTypeResolver.getDeviceType().getValue());
 
-    return constants;
+    return p.resolve(constants);
   }
 
   @ReactMethod
