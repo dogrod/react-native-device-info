@@ -173,38 +173,37 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
     return null;
   }
 
-  // 去除 constants，否则每次应用初始化就会获取 AndroidId，不符合个人信息保护法规定
-  // @Override
-  // public Map<String, Object> getConstants() {
-  //   String appVersion, buildNumber, appName;
+  @ReactMethod
+  public Map<String, Object> initDeviceInfo() {
+    String appVersion, buildNumber, appName;
 
-  //   try {
-  //     appVersion = getPackageInfo().versionName;
-  //     buildNumber = Integer.toString(getPackageInfo().versionCode);
-  //     appName = getReactApplicationContext().getApplicationInfo().loadLabel(getReactApplicationContext().getPackageManager()).toString();
-  //   } catch (Exception e) {
-  //     appVersion = "unknown";
-  //     buildNumber = "unknown";
-  //     appName = "unknown";
-  //   }
+    try {
+      appVersion = getPackageInfo().versionName;
+      buildNumber = Integer.toString(getPackageInfo().versionCode);
+      appName = getReactApplicationContext().getApplicationInfo().loadLabel(getReactApplicationContext().getPackageManager()).toString();
+    } catch (Exception e) {
+      appVersion = "unknown";
+      buildNumber = "unknown";
+      appName = "unknown";
+    }
 
-  //   final Map<String, Object> constants = new HashMap<>();
+    final Map<String, Object> constants = new HashMap<>();
 
-  //   constants.put("uniqueId", getUniqueIdSync());
-  //   constants.put("deviceId", Build.BOARD);
-  //   constants.put("bundleId", getReactApplicationContext().getPackageName());
-  //   constants.put("systemName", "Android");
-  //   constants.put("systemVersion", Build.VERSION.RELEASE);
-  //   constants.put("appVersion", appVersion);
-  //   constants.put("buildNumber", buildNumber);
-  //   constants.put("isTablet", deviceTypeResolver.isTablet());
-  //   constants.put("appName", appName);
-  //   constants.put("brand", Build.BRAND);
-  //   constants.put("model", Build.MODEL);
-  //   constants.put("deviceType", deviceTypeResolver.getDeviceType().getValue());
+    constants.put("uniqueId", getUniqueIdSync());
+    constants.put("deviceId", Build.BOARD);
+    constants.put("bundleId", getReactApplicationContext().getPackageName());
+    constants.put("systemName", "Android");
+    constants.put("systemVersion", Build.VERSION.RELEASE);
+    constants.put("appVersion", appVersion);
+    constants.put("buildNumber", buildNumber);
+    constants.put("isTablet", deviceTypeResolver.isTablet());
+    constants.put("appName", appName);
+    constants.put("brand", Build.BRAND);
+    constants.put("model", Build.MODEL);
+    constants.put("deviceType", deviceTypeResolver.getDeviceType().getValue());
 
-  //   return constants;
-  // }
+    return constants;
+  }
 
   @ReactMethod
   public void addListener(String eventName) {

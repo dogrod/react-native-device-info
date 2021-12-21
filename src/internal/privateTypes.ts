@@ -37,6 +37,7 @@ interface HiddenNativeMethods {
 }
 
 interface ExposedNativeMethods {
+  initDeviceInfo: () => Promise<NativeConstants>;
   getAndroidId: () => Promise<string>;
   getAndroidIdSync: () => string;
   getApiLevel: () => Promise<number>;

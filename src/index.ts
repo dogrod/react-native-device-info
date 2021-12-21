@@ -793,6 +793,7 @@ export function useManufacturer(): AsyncHookResult<string> {
 export type { AsyncHookResult, DeviceType, LocationProviderInfo, PowerState };
 
 const deviceInfoModule: DeviceInfoModule = {
+  initDeviceInfo: NativeModules.RNDeviceInfo.initDeviceInfo,
   getAndroidId,
   getAndroidIdSync,
   getApiLevel,
