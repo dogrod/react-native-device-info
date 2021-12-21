@@ -202,7 +202,7 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
     constants.put("model", Build.MODEL);
     constants.put("deviceType", deviceTypeResolver.getDeviceType().getValue());
 
-    return p.resolve(constants);
+    p.resolve(constants);
   }
 
   @ReactMethod
