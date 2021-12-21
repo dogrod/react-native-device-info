@@ -174,7 +174,7 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void Map<String, Object> initDeviceInfo(Promise p) {
+  public void initDeviceInfo(Promise p) {
     String appVersion, buildNumber, appName;
 
     try {
