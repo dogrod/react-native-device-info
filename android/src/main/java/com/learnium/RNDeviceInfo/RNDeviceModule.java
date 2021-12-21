@@ -41,6 +41,7 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
+import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.learnium.RNDeviceInfo.resolver.DeviceIdResolver;
@@ -187,20 +188,20 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
       appName = "unknown";
     }
 
-    final Map<String, Object> constants = new HashMap<>();
+    final WritableMap constants = new WritableNativeMap();
 
-    constants.put("uniqueId", getUniqueIdSync());
-    constants.put("deviceId", Build.BOARD);
-    constants.put("bundleId", getReactApplicationContext().getPackageName());
-    constants.put("systemName", "Android");
-    constants.put("systemVersion", Build.VERSION.RELEASE);
-    constants.put("appVersion", appVersion);
-    constants.put("buildNumber", buildNumber);
-    constants.put("isTablet", deviceTypeResolver.isTablet());
-    constants.put("appName", appName);
-    constants.put("brand", Build.BRAND);
-    constants.put("model", Build.MODEL);
-    constants.put("deviceType", deviceTypeResolver.getDeviceType().getValue());
+    constants.putString("uniqueId", getUniqueIdSync());
+    constants.putString("deviceId", Build.BOARD);
+    constants.putString("bundleId", getReactApplicationContext().getPackageName());
+    constants.putString("systemName", "Android");
+    constants.putString("systemVersion", Build.VERSION.RELEASE);
+    constants.putString("appVersion", appVersion);
+    constants.putString("buildNumber", buildNumber);
+    constants.putBoolean("isTablet", deviceTypeResolver.isTablet());
+    constants.putString("appName", appName);
+    constants.putString("brand", Build.BRAND);
+    constants.putString("model", Build.MODEL);
+    constants.putString("deviceType", deviceTypeResolver.getDeviceType().getValue());
 
     p.resolve(constants);
   }
