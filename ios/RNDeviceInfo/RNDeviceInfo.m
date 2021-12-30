@@ -158,14 +158,14 @@ RCT_EXPORT_METHOD(getAppBaseInfo:(RCTPromiseResolveBlock)resolve rejecter:(RCTPr
         @"buildNumber": [self getBuildNumber],
         @"appName": [self getAppName],
         @"bundleId": [self getBundleId],
-    })
+    });
 }
 
 RCT_EXPORT_METHOD(getDeviceInfo:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     resolve(@{
         @"brand": @"Apple",
         @"deviceId": [self getDeviceId],
-        @"deviceName": [self getDeviceName]
+        @"deviceName": [self getDeviceName],
         @"deviceType": [self getDeviceTypeName],
         @"isTablet": @([self isTablet]),
         @"manufacturer": @"Apple",
