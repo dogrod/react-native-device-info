@@ -15,7 +15,7 @@ export interface AppBaseInfo {
   bundleId: string;
 }
 
-export interface NativeConstants extends AppBaseInfo {
+export interface UserDeviceInfo {
   brand: string;
   deviceId: string;
   deviceType: DeviceType;
@@ -25,6 +25,8 @@ export interface NativeConstants extends AppBaseInfo {
   systemVersion: string;
   uniqueId: string;
 }
+
+export interface NativeConstants extends AppBaseInfo, UserDeviceInfo {}
 
 interface HiddenNativeMethods {
   getPowerState: () => Promise<PowerState>;

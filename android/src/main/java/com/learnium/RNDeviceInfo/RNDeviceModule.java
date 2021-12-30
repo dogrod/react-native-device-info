@@ -174,38 +174,11 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
     return null;
   }
 
-  @ReactMethod
-  public void initDeviceInfo(Promise p) {
-    String appVersion, buildNumber, appName;
-
-    try {
-      appVersion = getPackageInfo().versionName;
-      buildNumber = Integer.toString(getPackageInfo().versionCode);
-      appName = getReactApplicationContext().getApplicationInfo().loadLabel(getReactApplicationContext().getPackageManager()).toString();
-    } catch (Exception e) {
-      appVersion = "unknown";
-      buildNumber = "unknown";
-      appName = "unknown";
-    }
-
-    final WritableMap constants = new WritableNativeMap();
-
-    constants.putString("uniqueId", getUniqueIdSync());
-    constants.putString("deviceId", Build.BOARD);
-    constants.putString("bundleId", getReactApplicationContext().getPackageName());
-    constants.putString("systemName", "Android");
-    constants.putString("systemVersion", Build.VERSION.RELEASE);
-    constants.putString("appVersion", appVersion);
-    constants.putString("buildNumber", buildNumber);
-    constants.putBoolean("isTablet", deviceTypeResolver.isTablet());
-    constants.putString("appName", appName);
-    constants.putString("brand", Build.BRAND);
-    constants.putString("model", Build.MODEL);
-    constants.putString("deviceType", deviceTypeResolver.getDeviceType().getValue());
-
-    p.resolve(constants);
-  }
-
+  /**
+   * Get application base information.
+   * This method will not access device information
+   * @param p
+   */
   @ReactMethod
   public void getAppBaseInfo(Promise p) {
     String appVersion, buildNumber, appName;
@@ -226,6 +199,28 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
     constants.putString("appVersion", appVersion);
     constants.putString("buildNumber", buildNumber);
     constants.putString("bundleId", getReactApplicationContext().getPackageName());
+
+    p.resolve(constants);
+  }
+
+  /**
+   * Get user device information
+   * WARNING: USER DEVICE INFORMATION IS PART OF USER PRIVACY, CACHE THIS INFORMATION IS RECOMMENDED.
+   * PLEASE DO NOT CALL THIS METHOD TOO OFTER, OR YOUR APPLICATION MAY NOT PASS THE CHINESE REGULATOR'S SCRUTINY!!!
+   * @param p React Native Promise
+   */
+  @ReactMethod
+  public void getDeviceInfo(Promise p) {
+    final WritableMap constants = new WritableNativeMap();
+
+    constants.putString("uniqueId", getUniqueIdSync());
+    constants.putString("deviceId", Build.BOARD);
+    constants.putString("systemName", "Android");
+    constants.putString("systemVersion", Build.VERSION.RELEASE);
+    constants.putBoolean("isTablet", deviceTypeResolver.isTablet());
+    constants.putString("brand", Build.BRAND);
+    constants.putString("model", Build.MODEL);
+    constants.putString("deviceType", deviceTypeResolver.getDeviceType().getValue());
 
     p.resolve(constants);
   }
