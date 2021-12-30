@@ -8,12 +8,15 @@ export type NotchDevice = {
   [key: string]: string;
 };
 
-export interface NativeConstants {
+export interface AppBaseInfo {
   appName: string;
   appVersion: string;
-  brand: string;
   buildNumber: string;
   bundleId: string;
+}
+
+export interface NativeConstants extends AppBaseInfo {
+  brand: string;
   deviceId: string;
   deviceType: DeviceType;
   isTablet: boolean;

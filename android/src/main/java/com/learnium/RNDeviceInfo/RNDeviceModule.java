@@ -207,6 +207,30 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void getAppBaseInfo(Promise p) {
+    String appVersion, buildNumber, appName;
+
+    try {
+      appVersion = getPackageInfo().versionName;
+      buildNumber = Integer.toString(getPackageInfo().versionCode);
+      appName = getReactApplicationContext().getApplicationInfo().loadLabel(getReactApplicationContext().getPackageManager()).toString();
+    } catch (Exception e) {
+      appVersion = "unknown";
+      buildNumber = "unknown";
+      appName = "unknown";
+    }
+
+    final WritableMap constants = new WritableNativeMap();
+
+    constants.putString("appName", appName);
+    constants.putString("appVersion", appVersion);
+    constants.putString("buildNumber", buildNumber);
+    constants.putString("bundleId", getReactApplicationContext().getPackageName());
+
+    p.resolve(constants);
+  }
+
+  @ReactMethod
   public void addListener(String eventName) {
     // Keep: Required for RN built in Event Emitter Calls.
   }

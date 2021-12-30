@@ -169,6 +169,15 @@ RCT_EXPORT_METHOD(initDeviceInfo:(RCTPromiseResolveBlock)resolve rejecter:(RCTPr
     });
 }
 
+RCT_EXPORT_METHOD(getAppBaseInfo:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+    resolve(@{
+        @"appVersion": [self getAppVersion],
+        @"buildNumber": [self getBuildNumber],
+        @"appName": [self getAppName],
+        @"bundleId": [self getBundleId],
+    })
+}
+
 RCT_EXPORT_METHOD(getDeviceName:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     resolve(self.getDeviceName);
 }
