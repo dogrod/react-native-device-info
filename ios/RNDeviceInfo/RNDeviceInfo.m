@@ -165,8 +165,10 @@ RCT_EXPORT_METHOD(getDeviceInfo:(RCTPromiseResolveBlock)resolve rejecter:(RCTPro
     resolve(@{
         @"brand": @"Apple",
         @"deviceId": [self getDeviceId],
+        @"deviceName": [self getDeviceName]
         @"deviceType": [self getDeviceTypeName],
         @"isTablet": @([self isTablet]),
+        @"manufacturer": @"Apple",
         @"model": [self getModel],
         @"systemName": [self getSystemName],
         @"systemVersion": [self getSystemVersion],

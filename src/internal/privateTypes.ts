@@ -18,8 +18,10 @@ export interface AppBaseInfo {
 export interface UserDeviceInfo {
   brand: string;
   deviceId: string;
+  deviceName: string;
   deviceType: DeviceType;
   isTablet: boolean;
+  manufacturer: string;
   model: string;
   systemName: string;
   systemVersion: string;

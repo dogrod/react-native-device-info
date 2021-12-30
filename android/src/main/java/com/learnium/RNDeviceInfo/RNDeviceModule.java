@@ -213,14 +213,16 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
   public void getDeviceInfo(Promise p) {
     final WritableMap constants = new WritableNativeMap();
 
-    constants.putString("uniqueId", getUniqueIdSync());
+    constants.putString("brand", Build.BRAND);
     constants.putString("deviceId", Build.BOARD);
+    constants.putString("deviceName", getDeviceNameSync());
+    constants.putString("deviceType", deviceTypeResolver.getDeviceType().getValue());
+    constants.putBoolean("isTablet", deviceTypeResolver.isTablet());
+    constants.putString("manufacturer", Build.MANUFACTURER);
+    constants.putString("model", Build.MODEL);
     constants.putString("systemName", "Android");
     constants.putString("systemVersion", Build.VERSION.RELEASE);
-    constants.putBoolean("isTablet", deviceTypeResolver.isTablet());
-    constants.putString("brand", Build.BRAND);
-    constants.putString("model", Build.MODEL);
-    constants.putString("deviceType", deviceTypeResolver.getDeviceType().getValue());
+    constants.putString("uniqueId", getUniqueIdSync());
 
     p.resolve(constants);
   }
